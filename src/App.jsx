@@ -9,24 +9,18 @@ const App = React.createClass({
 
 
   handleChange: function(data,type) {
-    // this.setState({value: event.target.value})
-    // this.onSubmit(function(event){
+
     var bottledMessage = {type: type, username: data.username, content: data.content}
     var bottledNotification = {type: type, content: `${data.oldName} changed their name to ${data.username}`}
       switch(type) {
         case "postMessage":
-          // this.socket.onopen = function (ws) {
           this.socket.send(JSON.stringify(bottledMessage));
-          // }
+
           break;
         case "postNotification":
-          // handle incoming notification
-          // this.socket.onopen = function (ws) {
             this.socket.send(JSON.stringify(bottledNotification));
-          // }
           break;
         default:
-          // show an error in the console if the message type is unknown
           throw new Error("Unknown event type " + data.type);
       }
   },
@@ -54,7 +48,7 @@ const App = React.createClass({
       messages: [],
       clientCount:0
     }
-    return {data: data};// optional. if currentUser is not defined, it means the user is Anonymous
+    return {data: data};
   },
 
   render: function() {
